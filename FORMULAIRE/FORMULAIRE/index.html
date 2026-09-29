@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#00478f">
+  <title>CORE-MINING OPS • Groupe LEA</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/leaflet.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/jpeg" href="assets/logo_lea.jpg">
+  <link rel="apple-touch-icon" href="assets/logo_lea.jpg">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- EN-TÊTE SUPÉRIEUR CORE-MINING OPS -->
+  <header class="app-header">
+    <div class="app-brand">
+      <img src="assets/logo_lea.jpg" alt="Logo Groupe LEA" class="header-lea-logo">
+      <div class="brand-text-block">
+        <span class="brand-main-title">GROUPE LEA</span>
+        <span class="brand-sub-badge">CORE-MINING OPS</span>
+      </div>
+    </div>
+    
+    <div class="header-status-group">
+      <div class="sync-badge-pill online" id="syncStatusBadge">
+        <span>■</span>
+        <span id="syncStatusText">Connecté</span>
+      </div>
+      <button id="quickSyncBtn" style="background: none; border: none; cursor: pointer; font-size: 1.1rem;" title="Synchroniser avec Aly">🔄</button>
+    </div>
+  </header>
+
+  <div class="mobile-viewport">
+    
+    <!-- =================================================================== -->
+    <!-- ÉCRAN 1 : FORMULAIRE TERRAIN (Onglet "Inspect")                     -->
+    <!-- =================================================================== -->
+    <section class="tab-content active" id="tabInspect">
+      <div class="page-header">
+        <h1 class="page-title">FORMULAIRE TERRAIN</h1>
+        <p class="page-subtitle">Saisie des données opérationnelles en cours.</p>
+        <hr class="section-separator">
+      </div>
+
+      <div class="brutalist-card">
+        <div class="card-top-strip">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="assets/logo_lea.jpg" alt="Logo LEA" style="height: 18px; border-radius: 2px; border: 1px solid #000; background: #fff; vertical-align: middle;">
+            <span>TELEMETRY_DATA_ENTRY_NODE • GROUPE LEA</span>
+          </div>
+          <span class="strip-actions" id="demoFillBtn" title="Charger un exemple de terrain">⚡</span>
+        </div>
+
+        <form id="geologyFieldForm" class="card-body">
+          <!-- 1. SITE / LOCALISATION AVEC CARTE INTERACTIVE -->
+          <div class="form-field-group">
+            <label class="field-label" for="siteSelect">
+              <span>SITE / LOCALISATION</span>
+              <span class="label-val" id="mapCoordsBadge">6.6508°, -4.7042°</span>
+            </label>
+            <div class="brutalist-input-wrap">
+              <span class="brutalist-input-icon">📍</span>
+              <select class="brutalist-control has-icon" id="siteSelect" required>
+                <option value="" disabled selected>Sélectionner le site ou permis...</option>
+                <option value="PERMIS-PE47">PE47 • Bongouanou (Moronou - 380 km²)</option>
+                <option value="PERMIS-PR303">PR303 • Bongouanou (Moronou - 253 km²)</option>
+                <option value="PERMIS-PR302">PR302 • Béoumi (Gbêkê - 380 km²)</option>
+                <option value="PERMIS-PR962">PR962 • Gagnoa (Gôh - 400 km²)</option>
+                <option value="PERMIS-PR964">PR964 • Gagnoa (Gôh - 400 km²)</option>
+              </select>
+            </div>
+
+            <!-- MODULE CARTE SATELLITE INTERACTIVE DU TERRAIN (CÔTE D'IVOIRE) -->
+            <div class="map-field-container">
+              <div class="map-control-bar">
+                <div class="map-layer-switchers">
+                  <button type="button" class="btn-map-mode active" id="btnMapSatellite" title="Activer la vue satellite haute résolution">🛰️ SATELLITE</button>
+                  <button type="button" class="btn-map-mode" id="btnMapTopo" title="Activer la vue carte / routes">🗺️ CARTE</button>
+                </div>
+                <div class="map-actions-bar">
+                  <button type="button" class="btn-map-expand" id="mapExpandBtn" title="Agrandir / Réduire la hauteur de la carte">⛶ PLEIN ÉCRAN</button>
+                  <button type="button" class="btn-gps-fix" id="mapGpsFixBtn">📍 FIXER GPS</button>
+                </div>
+              </div>
+              <div class="map-viewport" id="interactiveMapViewport" title="Glissez ou cliquez sur la carte satellite pour pointer votre position">
+                <!-- Conteneur Leaflet Satellite initialisé par js/app.js -->
+              </div>
+              <div class="map-info-badge">
+                <span>Cible pointée : <strong id="mapTargetName">Bongouanou (PE47)</strong></span>
+                <span id="mapUtmZoneBadge">Zone 30N (WGS84)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. SUBSTANCE CIBLE -->
+          <div class="form-field-group">
+            <label class="field-label" for="substanceSelect">
+              <span>SUBSTANCE CIBLE</span>
+            </label>
+            <select class="brutalist-control" id="substanceSelect" required>
+              <option value="" disabled selected>Sélectionner une substance...</option>
+              <option value="SUBST_BX">Bauxite (Al2O3)</option>
+              <option value="SUBST_AU">Or (Au)</option>
+              <option value="SUBST_NI">Nickel (Ni)</option>
+              <option value="SUBST_CO">Cobalt (Co)</option>
+              <option value="SUBST_CR">Chrome (Cr)</option>
+              <option value="SUBST_BI">Bismuth (Bi)</option>
+              <option value="SUBST_MN">Manganèse (Mn)</option>
+            </select>
+          </div>
+
+          <!-- 3. CATÉGORIE D'ACTIVITÉ -->
+          <div class="form-field-group">
+            <label class="field-label" for="categorySelect">
+              <span>CATÉGORIE D'ACTIVITÉ</span>
+            </label>
+            <select class="brutalist-control" id="categorySelect" required>
+              <option value="" disabled selected>Sélectionner une activité...</option>
+              <option value="CAT_GREENFIELD">Exploration Greenfield (Prospection)</option>
+              <option value="CAT_BROWNFIELD">Exploration Brownfield (Extension)</option>
+              <option value="CAT_RESOURCE_DEF">Définition de Ressources (Maille forages)</option>
+              <option value="CAT_FEASIBILITY">Étude de Faisabilité (PFS / DFS)</option>
+              <option value="CAT_GRADE_CONTROL">Contrôle de Teneur Mine (Lizetta)</option>
+            </select>
+          </div>
+
+          <!-- 4. AVANCEMENT -->
+          <div class="form-field-group">
+            <div class="field-label">
+              <span>AVANCEMENT</span>
+              <span class="label-val" id="progressValDisplay">0%</span>
+            </div>
+            <div class="progress-slider-block">
+              <input type="range" class="brutalist-slider" id="progressSlider" min="0" max="100" value="0">
+              <div class="slider-scale-labels">
+                <span>0%</span>
+                <span>50%</span>
+                <span>100%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. STATUT ACTUEL (Grille 2x2) -->
+          <div class="form-field-group">
+            <label class="field-label">
+              <span>STATUT ACTUEL</span>
+            </label>
+            <div class="status-grid-2x2" id="statusChoiceGrid">
+              <div class="status-choice-btn selected" data-value="STAT_IN_PROGRESS">EN COURS</div>
+              <div class="status-choice-btn" data-value="STAT_SUSPENDED_WEATHER">SUSPENDU</div>
+              <div class="status-choice-btn" data-value="STAT_VALIDATED">TERMINÉ</div>
+              <div class="status-choice-btn" data-value="STAT_ANOMALY_FOUND">INCIDENT</div>
+            </div>
+            <input type="hidden" id="selectedStatusInput" value="STAT_IN_PROGRESS">
+          </div>
+
+          <!-- 6. MESSAGE CLÉ -->
+          <div class="form-field-group">
+            <label class="field-label" for="keyMessageInput">
+              <span>MESSAGE CLÉ</span>
+            </label>
+            <textarea class="brutalist-control" id="keyMessageInput" placeholder="Observations terrain, notes techniques..." required></textarea>
+          </div>
+
+          <!-- 7. PIÈCE JOINTE (PHOTO CAROTTE / AFFLEUREMENT / CERTIFICAT) -->
+          <div class="form-field-group">
+            <label class="field-label">
+              <span>PIÈCE JOINTE / PHOTO TERRAIN</span>
+              <span class="label-val" id="attachmentCountLabel">0 FICHIER</span>
+            </label>
+            
+            <input type="file" id="attachmentFileInput" accept="image/*,application/pdf" capture="environment" style="display: none;">
+            
+            <div class="attachment-dropzone" id="attachmentDropzone" title="Cliquez pour prendre une photo ou joindre un fichier">
+              <span class="attachment-dropzone-icon">📷</span>
+              <span class="attachment-dropzone-text">PRENDRE UNE PHOTO / JOINDRE UN FICHIER</span>
+              <span class="attachment-dropzone-hint">Photo carotte, affleurement, P-XRF ou document PDF</span>
+            </div>
+
+            <!-- Aperçu de la pièce jointe attachée -->
+            <div class="attachment-preview-box" id="attachmentPreviewBox">
+              <div class="attachment-thumb" id="attachmentThumbPreview">📄</div>
+              <div class="attachment-details">
+                <div class="attachment-filename" id="attachmentFileName">photo_carotte.jpg</div>
+                <div class="attachment-filesize" id="attachmentFileSize">240 KB</div>
+              </div>
+              <button type="button" class="btn-remove-attachment" id="removeAttachmentBtn" title="Supprimer la pièce jointe">&times;</button>
+            </div>
+          </div>
+
+          <div class="brutalist-dashed-line"></div>
+
+          <!-- BOUTON ENREGISTRER L'ENTRÉE (JAUNE SÉCURITÉ) -->
+          <button type="submit" class="btn-save-mining" id="saveRecordBtn">
+            <span>💾</span>
+            <span>ENREGISTRER L'ENTRÉE</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- ÉCRAN 2 : HISTORIQUE DES RAPPORTS (Onglet "History")               -->
+    <!-- =================================================================== -->
+    <section class="tab-content" id="tabHistory">
+      <div class="page-header">
+        <h1 class="page-title">HISTORIQUE DES RAPPORTS</h1>
+        <p class="page-subtitle">Consultez et gérez vos soumissions récentes.</p>
+        <hr class="section-separator">
+      </div>
+
+      <!-- Recherche & Filtre -->
+      <div class="search-filter-section">
+        <div class="search-field-group">
+          <label class="field-label" for="reportSearchInput">Rechercher</label>
+          <div class="brutalist-input-wrap">
+            <span class="brutalist-input-icon">🔍</span>
+            <input type="text" class="brutalist-control has-icon" id="reportSearchInput" placeholder="N° de rapport, équipement, ins">
+          </div>
+        </div>
+
+        <div class="search-field-group">
+          <label class="field-label" for="reportFilterSelect">Filtre</label>
+          <select class="brutalist-control" id="reportFilterSelect">
+            <option value="ALL">TOUTES LES SOUMISSIONS</option>
+            <option value="7_DAYS" selected>7 DERNIERS JOURS</option>
+            <option value="PENDING">EN ATTENTE DE SYNCHRO</option>
+            <option value="WITH_ATTACHMENT">AVEC PIÈCE JOINTE 📎</option>
+            <option value="INCIDENT">INCIDENTS / ANOMALIES</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Liste des cartes de rapports -->
+      <div class="reports-list" id="reportsListContainer">
+        <!-- Généré dynamiquement -->
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- ÉCRAN 3 : DASHBOARD (Onglet "Dashboard")                           -->
+    <!-- =================================================================== -->
+    <section class="tab-content" id="tabDashboard">
+      <div class="page-header">
+        <h1 class="page-title">TABLEAU DE BORD</h1>
+        <p class="page-subtitle">Vue synthétique du portefeuille Groupe LEA.</p>
+      <div class="dashboard-lea-banner">
+        <img src="assets/logo_lea.jpg" alt="Groupe LEA" class="dashboard-lea-logo">
+        <div>
+          <div class="dashboard-lea-title">GROUPE LEA (CÔTE D'IVOIRE)</div>
+          <div class="dashboard-lea-subtitle">Exploration Minière • Exploitation Lizetta • AMG Logistique</div>
+        </div>
+      </div>
+
+      <div class="brutalist-card">
+        <div class="card-top-strip"><span>LEA_ASSET_PORTFOLIO</span></div>
+        <div class="card-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="border: 2px solid #000; padding: 0.75rem; background: #fafafa;">
+              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #666;">PERMIS ACTIFS</div>
+              <div style="font-size: 1.5rem; font-weight: 900;" id="kpiSitesCount">5</div>
+            </div>
+            <div style="border: 2px solid #000; padding: 0.75rem; background: #fafafa;">
+              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #666;">SOUMISSIONS</div>
+              <div style="font-size: 1.5rem; font-weight: 900;" id="kpiTotalRecords">0</div>
+            </div>
+          </div>
+          <div style="border: 2px solid #000; padding: 0.75rem; background: #fff;">
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; margin-bottom: 0.35rem;">BRANCHES OPÉRATIONNELLES</div>
+            <div style="font-size: 0.8rem; line-height: 1.4;">
+              • <strong>LEA Exploration</strong> : Recherche amont (PR303, PR962, PR964)<br>
+              • <strong>Lizetta Mines</strong> : Exploitation Bauxite & Nickel (PE47, PR302)<br>
+              • <strong>AMG Logistique</strong> : Terminal vrac minier Port d'Abidjan
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- ÉCRAN 4 : LOGS & EXPORTS (Onglet "Logs")                            -->
+    <!-- =================================================================== -->
+    <section class="tab-content" id="tabLogs">
+      <div class="page-header">
+        <h1 class="page-title">LOGS & TÉLÉMÉTRIE</h1>
+        <p class="page-subtitle">Exports pour le pipeline Aly et coordonnées GPS.</p>
+        <hr class="section-separator">
+      </div>
+
+      <div class="brutalist-card">
+        <div class="card-top-strip"><span>GNSS_TELEMETRY_NODE</span></div>
+        <div class="card-body">
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 0.75rem;">
+            <strong>GPS Actuel :</strong> <span id="gpsCoordsDisplay">6.650812°, -4.704205° (Zone 30N)</span><br>
+            <strong>Précision :</strong> ± 2.5m (GNSS WGS84 Côte d'Ivoire)
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <button class="btn-report-action yellow" id="exportCsvBtn" type="button">📊 CSV EXCEL</button>
+            <button class="btn-report-action" id="exportGeoJsonBtn" type="button">🗺️ QGIS SIG</button>
+            <button class="btn-report-action" id="exportJsonBatchBtn" type="button">📦 JSON ALY</button>
+            <button class="btn-report-action" id="viewJsonSchemaBtn" type="button">📋 SCHÉMA V7</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- BARRE DE NAVIGATION INFÉRIEURE FIXE (BOTTOM DOCK)                   -->
+  <!-- =================================================================== -->
+  <nav class="bottom-nav-bar">
+    <div class="nav-tab-item" data-tab="tabDashboard">
+      <span class="nav-tab-icon">⊞</span>
+      <span class="nav-tab-label">Dashboard</span>
+    </div>
+    <div class="nav-tab-item active" data-tab="tabInspect">
+      <span class="nav-tab-icon">🛡️</span>
+      <span class="nav-tab-label">Inspect</span>
+    </div>
+    <div class="nav-tab-item" data-tab="tabLogs">
+      <span class="nav-tab-icon">⛰️</span>
+      <span class="nav-tab-label">Logs</span>
+    </div>
+    <div class="nav-tab-item" data-tab="tabHistory">
+      <span class="nav-tab-icon">⏱️</span>
+      <span class="nav-tab-label">History</span>
+    </div>
+  </nav>
+
+  <!-- Modal Détail / Édition avec Support Pièce Jointe -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modalTitle">RAPPORT DÉTAILLÉ</span>
+        <button style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn-report-action yellow" id="modalCopyBtn" type="button">COPIER</button>
+        <button class="btn-report-action" id="modalCloseBtn" type="button">FERMER</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/leaflet.js"></script>
+  <script src="js/schema.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/geo.js"></script>
+  <script src="js/pipeline-export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

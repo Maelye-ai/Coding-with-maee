@@ -1,0 +1,181 @@
+[
+  {
+    "id": "REC-20260927-001",
+    "site": {
+      "id": "SITE-BOU-01",
+      "name": "Bougouni Ouest",
+      "code": "BOU-W"
+    },
+    "substance": {
+      "code": "SUBST_LI",
+      "label": "Lithium",
+      "symbol": "Li",
+      "unit": "% Li2O"
+    },
+    "category": {
+      "code": "CAT_RESOURCE_DEF",
+      "label": "Délinéation"
+    },
+    "progress": {
+      "stageCode": "STAGE_DRILL_DDH",
+      "stageLabel": "DDH",
+      "percentCompleted": 65
+    },
+    "status": {
+      "code": "STAT_ANOMALY_FOUND",
+      "label": "Anomalie",
+      "severity": "CRITICAL"
+    },
+    "keyMessage": {
+      "typeCode": "MSG_ANOMALY_ALERT",
+      "typeLabel": "Alerte",
+      "executiveSummary": "Intersection pegmatite à spodumène sur 18.4m."
+    },
+    "coordinates": {
+      "latitude": 11.428512,
+      "longitude": -7.48391,
+      "datum": "WGS84"
+    },
+    "metadata": {
+      "createdAt": "2026-09-27T10:00:33.418Z",
+      "syncStatus": "PENDING_OFFLINE"
+    },
+    "serverIngestedAt": "2026-09-27T10:00:33.557Z",
+    "alyBatchId": "ALY-SRV-MUJNE905"
+  },
+  {
+    "id": "REC-LEA-PR962-TEST",
+    "company": "GROUPE LEA",
+    "groupEntity": {
+      "code": "LEA_EXPLORATION",
+      "label": "LEA Exploration Minière"
+    },
+    "site": {
+      "id": "PERMIS-PR962",
+      "name": "Permis PR962 - Gagnoa",
+      "code": "PR962",
+      "region": "Gôh (Gagnoa)",
+      "country": "Côte d'Ivoire",
+      "surfaceKm2": 400,
+      "partner": "Opéré à 100% par LEA"
+    },
+    "substance": {
+      "code": "SUBST_AU",
+      "label": "Or (Au)",
+      "symbol": "Au",
+      "unit": "g/t"
+    },
+    "category": {
+      "code": "CAT_RESOURCE_DEF",
+      "label": "Délinéation de Ressources"
+    },
+    "progress": {
+      "stageCode": "STAGE_DRILL_DDH",
+      "stageLabel": "Sondage carotté DDH",
+      "percentCompleted": 65,
+      "metricValue": 520,
+      "metricUnit": "mètres"
+    },
+    "status": {
+      "code": "STAT_ANOMALY_FOUND",
+      "label": "Anomalie géologique",
+      "severity": "CRITICAL"
+    },
+    "targetAudience": {
+      "code": "AUD_DIRECTION_LEA",
+      "label": "Direction Générale Groupe LEA"
+    },
+    "keyMessage": {
+      "typeCode": "MSG_ANOMALY_ALERT",
+      "typeLabel": "Alerte Découverte",
+      "executiveSummary": "Faisceau filonien aurifère à or visible avec signature bismuth (> 500 ppm Bi) recoupé sur 14.8m.",
+      "recommendedAction": "Planifier des forages intercalaires vers le permis limitrophe PR964."
+    },
+    "coordinates": {
+      "latitude": 6.13192,
+      "longitude": -5.95061,
+      "altitudeM": 165,
+      "accuracyM": 2.5,
+      "datum": "WGS84",
+      "utm": "Zone 30N (Côte d'Ivoire)"
+    },
+    "metadata": {
+      "createdAt": "2026-09-27T10:31:32.252Z",
+      "clientCompany": "GROUPE LEA",
+      "syncStatus": "PENDING_OFFLINE"
+    },
+    "serverIngestedAt": "2026-09-27T10:31:32.314Z",
+    "alyBatchId": "ALY-SRV-MUJOI38A"
+  },
+  {
+    "id": "REC-LEA-PHOTO-TEST",
+    "company": "GROUPE LEA",
+    "groupEntity": {
+      "code": "LEA_EXPLORATION",
+      "label": "LEA Exploration Minière"
+    },
+    "site": {
+      "id": "PERMIS-PR962",
+      "name": "Permis PR962 - Gagnoa",
+      "code": "PR962",
+      "region": "Gôh (Gagnoa)",
+      "country": "Côte d'Ivoire",
+      "surfaceKm2": 400,
+      "partner": "Opéré à 100% par LEA"
+    },
+    "substance": {
+      "code": "SUBST_AU",
+      "label": "Or (Au)",
+      "symbol": "Au",
+      "unit": "g/t"
+    },
+    "category": {
+      "code": "CAT_RESOURCE_DEF",
+      "label": "Délinéation de Ressources"
+    },
+    "progress": {
+      "stageCode": "STAGE_DRILL_DDH",
+      "stageLabel": "Sondage carotté DDH",
+      "percentCompleted": 65,
+      "metricValue": 520,
+      "metricUnit": "mètres"
+    },
+    "status": {
+      "code": "STAT_ANOMALY_FOUND",
+      "label": "Anomalie géologique",
+      "severity": "CRITICAL"
+    },
+    "targetAudience": {
+      "code": "AUD_DIRECTION_LEA",
+      "label": "Direction Générale Groupe LEA"
+    },
+    "keyMessage": {
+      "typeCode": "MSG_ANOMALY_ALERT",
+      "typeLabel": "Alerte Découverte",
+      "executiveSummary": "Faisceau filonien aurifère à or visible avec signature bismuth (> 500 ppm Bi) recoupé sur 14.8m.",
+      "recommendedAction": "Planifier des forages intercalaires vers le permis limitrophe PR964."
+    },
+    "coordinates": {
+      "latitude": 6.13192,
+      "longitude": -5.95061,
+      "altitudeM": 165,
+      "accuracyM": 2.5,
+      "datum": "WGS84",
+      "utm": "Zone 30N (Côte d'Ivoire)"
+    },
+    "attachment": {
+      "name": "carotte_forage_DDH_GAG18.jpg",
+      "type": "image/jpeg",
+      "size": 45200,
+      "dataUrl": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP...",
+      "timestamp": "2026-09-27T10:58:55.393Z"
+    },
+    "metadata": {
+      "createdAt": "2026-09-27T10:58:55.396Z",
+      "clientCompany": "GROUPE LEA",
+      "syncStatus": "PENDING_OFFLINE"
+    },
+    "serverIngestedAt": "2026-09-27T10:58:55.438Z",
+    "alyBatchId": "ALY-SRV-MUJPHB2M"
+  }
+]
