@@ -1,0 +1,18 @@
+{
+  "name": "CORE-MINING OPS • GROUPE LEA",
+  "short_name": "Groupe LEA",
+  "description": "Application terrain de collecte géologique structurée pour le Groupe LEA et le pipeline du Rôle 1 (Aly)",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#00478f",
+  "theme_color": "#00478f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/logo_lea.jpg",
+      "sizes": "664x462",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

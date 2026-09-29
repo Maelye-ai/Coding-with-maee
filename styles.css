@@ -1,0 +1,1071 @@
+/* ==========================================================================
+   CORE-MINING OPS • DESIGN SYSTEM NÉO-BRUTALISTE INDUSTRIEL
+   Inspiré directement des interfaces de terminaux miniers de terrain.
+   Bords nets 2px #000, ombres portées nettes (hard shadows), typographie monospace
+   et touches d'alerte Jaune Minier Sécurité (#ffcc00) & Bleu Cobalt (#00478f).
+   ========================================================================== */
+
+:root {
+  --bg-app: #f4f5f7;
+  --bg-surface: #ffffff;
+  --bg-dark-blue: #00478f;
+  --bg-dark-blue-hover: #00366d;
+  --accent-yellow: #ffcc00;
+  --accent-yellow-hover: #e6b800;
+
+  --border-black: 2px solid #000000;
+  --border-light: 1px solid #d1d5db;
+  --border-dashed: 1.5px dashed #000000;
+  
+  --shadow-hard: 3px 3px 0px #000000;
+  --shadow-hard-lg: 4px 4px 0px #000000;
+  --shadow-hard-sm: 2px 2px 0px #000000;
+
+  --text-black: #000000;
+  --text-dark: #111827;
+  --text-muted: #4b5563;
+  --text-light-muted: #6b7280;
+  --text-white: #ffffff;
+
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px; /* Espace pour la barre de navigation du bas */
+}
+
+/* En-tête Supérieur CORE-MINING OPS */
+.app-header {
+  background: #ffffff;
+  border-bottom: var(--border-black);
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--bg-dark-blue);
+}
+
+.header-lea-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 3px;
+  background: #ffffff;
+  padding: 1px 3px;
+  border: 1.5px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+  transition: transform 0.15s ease;
+}
+
+.header-lea-logo:hover {
+  transform: scale(1.05);
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-main-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--bg-dark-blue);
+  letter-spacing: -0.01em;
+}
+
+.brand-sub-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #555555;
+  letter-spacing: 0.04em;
+}
+
+/* Bannière Identitaire Dashboard LEA */
+.dashboard-lea-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: var(--border-black);
+  box-shadow: var(--shadow-hard);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.dashboard-lea-logo {
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+  background: #ffffff;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+
+.dashboard-lea-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--bg-dark-blue);
+  line-height: 1.2;
+}
+
+.dashboard-lea-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+}
+
+.header-status-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sync-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border: 1.5px solid #000;
+  border-radius: 4px;
+  background: #e5e7eb;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sync-badge-pill.online {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.sync-badge-pill.offline {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Conteneur de l'écran principal */
+.mobile-viewport {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+}
+
+/* Titres de page */
+.page-header {
+  margin-bottom: 1.25rem;
+}
+
+.page-title {
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.section-separator {
+  border: none;
+  border-bottom: var(--border-black);
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Vue Onglets (Switchable) */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CARTE NÉO-BRUTALISTE */
+.brutalist-card {
+  background: var(--bg-surface);
+  border: var(--border-black);
+  box-shadow: var(--shadow-hard-lg);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.card-top-strip {
+  background: var(--bg-dark-blue);
+  color: var(--text-white);
+  padding: 0.5rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--border-black);
+}
+
+.card-top-strip .strip-actions {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 1.25rem 1.15rem;
+}
+
+/* Champs du Formulaire */
+.form-field-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000000;
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-label .label-val {
+  color: var(--bg-dark-blue);
+  font-size: 0.85rem;
+}
+
+/* Contrôles de Saisie Néo-brutalistes */
+.brutalist-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.brutalist-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  font-size: 1.05rem;
+  pointer-events: none;
+  color: #111;
+}
+
+.brutalist-control {
+  width: 100%;
+  min-height: 44px;
+  background: #ffffff;
+  border: var(--border-black);
+  border-radius: 0px;
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #000000;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.brutalist-control.has-icon {
+  padding-left: 2.5rem;
+}
+
+.brutalist-control:focus {
+  background: #fffef2;
+  box-shadow: 2px 2px 0px #000;
+}
+
+select.brutalist-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.2rem;
+}
+
+textarea.brutalist-control {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   MODULE CARTE SATELLITE INTERACTIVE DU TERRAIN (GROUPE LEA - CÔTE D'IVOIRE)
+   ========================================================================== */
+.map-field-container {
+  margin-top: 0.4rem;
+  border: var(--border-black);
+  background: #0f172a;
+  overflow: hidden;
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.map-control-bar {
+  background: #e2e8f0;
+  border-bottom: 1.5px solid #000;
+  padding: 0.4rem 0.65rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.map-layer-switchers {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.btn-map-mode {
+  background: #ffffff;
+  border: 1.5px solid #000;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  color: #000000;
+}
+
+.btn-map-mode:hover {
+  background: #f1f5f9;
+}
+
+.btn-map-mode.active {
+  background: var(--accent-yellow);
+  box-shadow: 1.5px 1.5px 0px #000;
+}
+
+.map-actions-bar {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.btn-map-expand {
+  background: #ffffff;
+  border: 1.5px solid #000;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  color: #000;
+}
+
+.btn-map-expand:hover {
+  background: #f1f5f9;
+}
+
+.map-viewport {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #0f172a;
+  cursor: crosshair;
+  user-select: none;
+  overflow: hidden;
+  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.map-viewport.expanded {
+  height: 420px;
+}
+
+/* Style néo-brutaliste pour Leaflet */
+.leaflet-container {
+  font-family: var(--font-mono) !important;
+  background: #0f172a !important;
+}
+
+.leaflet-control-zoom {
+  border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0px #000 !important;
+  border-radius: 0px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 1rem !important;
+  border: none !important;
+  border-bottom: 1px solid #000 !important;
+  border-radius: 0px !important;
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+}
+
+.leaflet-control-zoom a:last-child {
+  border-bottom: none !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--accent-yellow) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.7) !important;
+  color: #cbd5e1 !important;
+  font-size: 8px !important;
+  padding: 1px 4px !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--accent-yellow) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  border: 2px solid #000 !important;
+  box-shadow: 3px 3px 0px #000 !important;
+  border-radius: 0px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  color: #000 !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 8px 10px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  background: #000000 !important;
+}
+
+/* Épingle personnalisée Leaflet néo-brutaliste */
+.brutalist-leaflet-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: grab;
+}
+
+.brutalist-marker-icon {
+  font-size: 26px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+  transition: transform 0.15s ease;
+}
+
+.brutalist-marker-icon:hover {
+  transform: scale(1.15);
+}
+
+.map-info-badge {
+  background: #ffffff;
+  border-top: 1.5px solid #000;
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-info-badge strong {
+  color: var(--bg-dark-blue);
+}
+
+.btn-gps-fix {
+  background: var(--accent-yellow);
+  border: 1.5px solid #000;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.btn-gps-fix:hover {
+  background: var(--accent-yellow-hover);
+}
+
+/* ==========================================================================
+   MODULE PIÈCE JOINTE (PHOTO DE TERRAIN / CAROTTE / PDF)
+   ========================================================================== */
+.attachment-dropzone {
+  border: var(--border-dashed);
+  background: #fafafa;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.attachment-dropzone:hover {
+  background: #fffef2;
+  border-color: #000000;
+}
+
+.attachment-dropzone-icon {
+  font-size: 1.4rem;
+}
+
+.attachment-dropzone-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.attachment-dropzone-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Aperçu de la pièce jointe */
+.attachment-preview-box {
+  display: none;
+  border: var(--border-black);
+  background: #ffffff;
+  padding: 0.65rem;
+  margin-top: 0.5rem;
+  box-shadow: var(--shadow-hard-sm);
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.attachment-preview-box.active {
+  display: flex;
+}
+
+.attachment-thumb {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid #000;
+  object-fit: cover;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.attachment-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.attachment-filename {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000;
+}
+
+.attachment-filesize {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.btn-remove-attachment {
+  background: #fee2e2;
+  border: 1.5px solid #000;
+  color: #b91c1c;
+  font-weight: 800;
+  font-size: 0.85rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-remove-attachment:hover {
+  background: #fca5a5;
+}
+
+/* Badge pièce jointe dans les fiches de rapport */
+.attachment-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #f8fafc;
+  border: 1px solid #000;
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.4rem;
+  color: #1e293b;
+}
+
+/* Zone d'aperçu de la pièce jointe dans le Modal */
+.modal-attachment-preview {
+  margin-top: 0.85rem;
+  border: 2px solid #000;
+  background: #f8fafc;
+  padding: 0.75rem;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.modal-attachment-img {
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border: 1.5px solid #000;
+  display: block;
+  margin: 0.5rem 0;
+  background: #0f172a;
+}
+
+/* Zones de permis interactives sur la carte SVG */
+.map-permit-zone {
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map-permit-zone:hover circle {
+  fill-opacity: 0.55 !important;
+  stroke-width: 3px !important;
+}
+
+.map-permit-zone:hover text {
+  font-size: 10.5px !important;
+  font-weight: 900 !important;
+}
+
+/* Jauge d'Avancement */
+.progress-slider-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.brutalist-slider {
+  width: 100%;
+  height: 8px;
+  background: #000000;
+  border-radius: 0px;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.brutalist-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-yellow);
+  border: 2px solid #000000;
+  border-radius: 0px;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.slider-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Grille 2x2 du Statut Actuel */
+.status-grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.status-choice-btn {
+  background: #ffffff;
+  border: var(--border-black);
+  padding: 0.65rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s ease;
+  color: #000;
+}
+
+.status-choice-btn:hover {
+  background: #f3f4f6;
+}
+
+.status-choice-btn.selected {
+  background: var(--accent-yellow);
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* Ligne pointillée séparatrice */
+.brutalist-dashed-line {
+  border-top: var(--border-dashed);
+  margin: 1.25rem 0;
+}
+
+/* Gros Bouton Jaune Minier Sécurité */
+.btn-save-mining {
+  width: 100%;
+  background: var(--accent-yellow);
+  border: var(--border-black);
+  box-shadow: var(--shadow-hard);
+  color: #000000;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-save-mining:hover {
+  background: var(--accent-yellow-hover);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #000;
+}
+
+.btn-save-mining:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+/* SECTION HISTORIQUE DES RAPPORTS */
+.search-filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.search-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Liste des Cartes de Rapports */
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.report-card {
+  background: #ffffff;
+  border: var(--border-black);
+  box-shadow: var(--shadow-hard);
+  transition: transform 0.15s ease;
+}
+
+.report-card-header {
+  background: var(--bg-dark-blue);
+  color: #ffffff;
+  padding: 0.4rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-card-body {
+  padding: 0.95rem 1rem;
+}
+
+.report-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 0.35rem;
+}
+
+.report-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.report-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #d1d5db;
+  margin-top: 0.75rem;
+}
+
+.status-badge-mining {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border: 1.5px solid #000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-badge-mining.synced {
+  background: #e5e7eb;
+  color: #000;
+}
+
+.status-badge-mining.pending {
+  background: #fef3c7;
+  color: #000;
+}
+
+.btn-report-action {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  background: #ffffff;
+  border: 1.5px solid #000;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.1s ease;
+}
+
+.btn-report-action:hover {
+  background: #f3f4f6;
+}
+
+.btn-report-action.yellow {
+  background: var(--accent-yellow);
+}
+
+.btn-report-action.yellow:hover {
+  background: var(--accent-yellow-hover);
+}
+
+/* BARRE DE NAVIGATION INFÉRIEURE FIXE (BOTTOM DOCK) */
+.bottom-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--bg-dark-blue);
+  border-top: var(--border-black);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  padding: 0 0.5rem;
+  z-index: 100;
+}
+
+.nav-tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  height: 48px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 4px;
+}
+
+.nav-tab-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.nav-tab-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav-tab-item.active {
+  background: var(--accent-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.nav-tab-item.active .nav-tab-label {
+  font-weight: 900;
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  top: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 480px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  background: #ffffff;
+  border: var(--border-black);
+  box-shadow: var(--shadow-hard);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.5rem;
+  animation: slideDown 0.2s ease;
+}
+
+.toast.success { background: #dcfce7; border-color: #000; }
+.toast.warning { background: #fef3c7; border-color: #000; }
+.toast.error { background: #fee2e2; border-color: #000; }
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  padding: 1rem;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #ffffff;
+  border: var(--border-black);
+  box-shadow: 6px 6px 0px #000;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  background: var(--bg-dark-blue);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-bottom: var(--border-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.modal-body {
+  padding: 1.15rem;
+  overflow-y: auto;
+  font-size: 0.85rem;
+}
+
+.modal-footer {
+  padding: 0.75rem 1rem;
+  border-top: var(--border-black);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
